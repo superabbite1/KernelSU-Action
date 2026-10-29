@@ -182,7 +182,8 @@ jobs:
           LLVM_IAS=1 \
           CROSS_COMPILE=aarch64-linux-gnu- \
           CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-          HOSTCFLAGS=-fcommon
+          HOSTCFLAGS=-fcommon \
+          KCFLAGS=-Wno-missing-attributes
           " | tee -a $GITHUB_ENV
 
       - name: Make defconfig
