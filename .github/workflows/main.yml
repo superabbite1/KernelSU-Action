@@ -21,7 +21,7 @@ on:
 jobs:
   check_kernelsu_update:
     name: Check KernelSU update
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Check KernelSU version
         id: check_kernelsu_version
@@ -39,7 +39,7 @@ jobs:
     name: Build kernel
     needs: check_kernelsu_update
     if: inputs.allow_rebuild || needs.check_kernelsu_update.outputs.local_version != needs.check_kernelsu_update.outputs.remote_version
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     steps:
