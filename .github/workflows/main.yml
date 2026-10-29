@@ -136,6 +136,18 @@ jobs:
           sed -i 's/-Qunused-arguments//g' arch/arm64/kernel/vdso32/Makefile
           sed -i 's/-Qunused-arguments//g' arch/arm64/kernel/vdso32/../../../arm/vdso/Makefile 2>/dev/null || true
 
+      - name: Set safe build info
+        run: |
+          echo "KBUILD_BUILD_USER=builder" | tee -a $GITHUB_ENV
+          echo "KBUILD_BUILD_HOST=buildhost" | tee -a $GITHUB_ENV
+          echo "KBUILD_BUILD_TIMESTAMP=1" | tee -a $GITHUB_ENV
+
+      - name: Fix compile.h generation
+        run: |
+          sed -i "s/\$(shell whoami)/builder/g" init/Makefile
+          sed -i "s/\$(shell hostname)/buildhost/g" init/Makefile
+          
+
       - name: "AOSP-Clang: Restore"
         id: aosp_clang_restore
         if: env.clang_type == 'aosp'
