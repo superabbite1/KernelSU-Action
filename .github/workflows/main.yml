@@ -130,6 +130,11 @@ jobs:
               echo "Applying KernelSU patch: $line"
               git apply -p2 --directory KernelSU/kernel "this-repo/patches/$line"
           done <<<"$kernelsu_patch"
+          
+      - name: Fix vdso32 for GCC
+        run: |
+          sed -i 's/-Qunused-arguments//g' arch/arm64/kernel/vdso32/Makefile
+          sed -i 's/-Qunused-arguments//g' arch/arm64/kernel/vdso32/../../../arm/vdso/Makefile 2>/dev/null || true
 
       - name: "AOSP-Clang: Restore"
         id: aosp_clang_restore
