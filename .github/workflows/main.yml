@@ -64,7 +64,16 @@ jobs:
           sudo apt update
           sudo apt install -y \
               binutils-arm-linux-gnueabi \
-              binutils-aarch64-linux-gnu
+              binutils-aarch64-linux-gnu \
+              gcc-arm-linux-gnueabi \
+              gcc-aarch64-linux-gnu \
+              python2 \
+              bc \
+              bison \
+              flex \
+              libssl-dev \
+              libelf-dev
+          sudo ln -sf /usr/bin/python2 /usr/bin/python
 
       - name: Checkout kernel source
         uses: actions/checkout@v4
