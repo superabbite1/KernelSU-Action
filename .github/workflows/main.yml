@@ -2,7 +2,7 @@ name: Check and Build
 
 env:
   kernel_repository: SailfishOS-chiron/kernel_xiaomi_msm8998
-  kernel_branch: master
+  kernel_branch: sagit-o-oss
   device: sagit
   clang_version: r365631c
   defconfig: |
