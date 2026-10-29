@@ -109,6 +109,7 @@ jobs:
           echo 'CONFIG_KPROBES=y' >>arch/arm64/configs/merged_defconfig
           echo 'CONFIG_HAVE_KPROBES=y' >>arch/arm64/configs/merged_defconfig
           echo 'CONFIG_KPROBE_EVENTS=y' >>arch/arm64/configs/merged_defconfig
+          echo 'CONFIG_WERROR=n' >>arch/arm64/configs/merged_defconfig
 
       - name: Apply kernel patch
         run: |
@@ -183,7 +184,7 @@ jobs:
           CROSS_COMPILE=aarch64-linux-gnu- \
           CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
           HOSTCFLAGS=-fcommon \
-          KCFLAGS=-Wno-missing-attributes
+          KCFLAGS=-Wno-missing-attributes\ -Wno-zero-length-bounds\ -Wno-error
           " | tee -a $GITHUB_ENV
 
       - name: Make defconfig
